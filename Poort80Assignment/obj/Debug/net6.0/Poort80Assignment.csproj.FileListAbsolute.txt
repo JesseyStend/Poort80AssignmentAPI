@@ -25,3 +25,6 @@ C:\Users\TheJe\source\repos\Poort80Assignment\Poort80Assignment\obj\Debug\net6.0
 C:\Users\TheJe\source\repos\Poort80Assignment\Poort80Assignment\obj\Debug\net6.0\Poort80Assignment.pdb
 C:\Users\TheJe\source\repos\Poort80Assignment\Poort80Assignment\obj\Debug\net6.0\Poort80Assignment.genruntimeconfig.cache
 C:\Users\TheJe\source\repos\Poort80Assignment\Poort80Assignment\obj\Debug\net6.0\ref\Poort80Assignment.dll
+C:\Users\TheJe\source\repos\Poort80Assignment\Poort80Assignment\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\TheJe\source\repos\Poort80Assignment\Poort80Assignment\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\TheJe\source\repos\Poort80Assignment\Poort80Assignment\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
