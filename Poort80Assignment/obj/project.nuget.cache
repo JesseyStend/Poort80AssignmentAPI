@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xptmV18YXxLneVPQ70V+yccPYPgEF1y+RkbqqmaoaNW9y9qWykdF11NmthzCWtlIBpE9GhWYBjdOhv6Z55bSqA==",
+  "dgSpecHash": "54zF5NO7Q0DB31c4r2BgpabY10Eh2GnORTeCmEJrRwyUPInAT9B1ECSh64yj948BRf1xp0Zckp+rPFvNY91nkw==",
   "success": true,
   "projectFilePath": "C:\\Users\\TheJe\\source\\repos\\Poort80Assignment\\Poort80Assignment\\Poort80Assignment.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\TheJe\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.7\\microsoft.entityframeworkcore.abstractions.6.0.7.nupkg.sha512",
     "C:\\Users\\TheJe\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.7\\microsoft.entityframeworkcore.analyzers.6.0.7.nupkg.sha512",
     "C:\\Users\\TheJe\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.7\\microsoft.entityframeworkcore.design.6.0.7.nupkg.sha512",
+    "C:\\Users\\TheJe\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\6.0.7\\microsoft.entityframeworkcore.inmemory.6.0.7.nupkg.sha512",
     "C:\\Users\\TheJe\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.7\\microsoft.entityframeworkcore.relational.6.0.7.nupkg.sha512",
     "C:\\Users\\TheJe\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.7\\microsoft.entityframeworkcore.sqlserver.6.0.7.nupkg.sha512",
     "C:\\Users\\TheJe\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\6.0.7\\microsoft.entityframeworkcore.tools.6.0.7.nupkg.sha512",

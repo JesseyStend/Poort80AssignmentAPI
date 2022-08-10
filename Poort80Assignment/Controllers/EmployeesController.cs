@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Poort80Assignment.Context;
 using Poort80Assignment.Interfaces;
 using Poort80Assignment.Models;
+using Poort80Assignment.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,60 +15,35 @@ namespace Poort80Assignment.Controllers
     {
 
         private readonly ILogger<EmployeesController> _logger;
-        private IEployeeData _employeeData;
+        private SqlEmployeeService _employeeService;
+        private SqlDepartmentService _departmentService;
 
-        public EmployeesController(ILogger<EmployeesController> logger, IEployeeData employeeData)
+        public EmployeesController(ILogger<EmployeesController> logger, SqlEmployeeService employeeService, SqlDepartmentService departmentService)
         {
             _logger = logger;
-            _employeeData = employeeData;
+            _employeeService = employeeService;
+            _departmentService = departmentService;
         }
 
-        // GET: api/<ValuesController>
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(_employeeData.GetEmployees());
-        }
-
-        // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        public async Task<ActionResult<EmployeeWithDepartment>> Get(int id)
         {
-            Employee employee = _employeeData.GetEmployee(id);
-            if (employee == null)
-                return NotFound($"Employee with Id: {id} was not found");
-            return Ok(employee);
+            Employee? employee = _employeeService.Find(id);
+            EmployeeWithDepartment employeeWithDepartment = new()
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                DepartmentId = employee.DepartmentId,
+                Department = _departmentService.Find(id)
+            };
+            return Ok(employeeWithDepartment);
         }
 
-        // POST api/<ValuesController>
-        [HttpPost]
-        public IActionResult Post([FromBody] Employee value)
+        [HttpGet]
+        public async Task<ActionResult<List<Employee>>> Get()
         {
-            _employeeData.AddEmployee(value);
-            return Created(HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + HttpContext.Request.Path + "/" + value.Id, value);
-        }
-
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] Employee value)
-        {
-            Employee employee = _employeeData.GetEmployee(id);
-            if (employee == null)
-                return NotFound($"Employee with Id: {id} was not found");
-            value.Id = employee.Id;
-            value = _employeeData.EditEmployee(value);
-            return Ok(value);
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
-        {
-            Employee employee = _employeeData.GetEmployee(id);
-            if (employee == null)
-                return NotFound($"Employee with Id: {id} was not found");
-            _employeeData.DeleteEmplyee(employee);
-            return Ok();
+            List<Employee> employees = _employeeService.All();
+            return Ok(employees);
         }
     }
 }
