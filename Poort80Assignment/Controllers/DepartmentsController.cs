@@ -14,19 +14,52 @@ namespace Poort80Assignment.Controllers
     public class DepartmentsController : ControllerBase
     {
         private readonly ILogger<DepartmentsController> _logger;
-        private SqlDepartmentService _departmentService;
+        private ICRUDservice<Department, DepartmentIn> _departmentService;
 
-        public DepartmentsController(ILogger<DepartmentsController> logger, SqlDepartmentService service)
+        public DepartmentsController(ILogger<DepartmentsController> logger, ICRUDservice<Department, DepartmentIn> service)
         {
             _logger = logger;
             _departmentService = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Department>>> Get()
+        public ActionResult<List<Department>> Get()
         {
             List<Department> departments = _departmentService.All();
             return Ok(departments);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Department> Get(int id)
+        {
+            Department? department = _departmentService.Find(id);
+            return Ok(department);
+        }
+
+        [HttpPost]
+        public ActionResult<Department> Post(DepartmentIn change)
+        {
+            Department? department = _departmentService.Create(change);
+            return Ok(department);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult<Department> Put(int id, DepartmentIn change)
+        {
+            Department? department = _departmentService.Find(id);
+            if (department == null)
+                return NotFound($"Couldn't find employee with {id}");
+            return Ok(_departmentService.Update(change, department));
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Department> Delete(int id)
+        {
+            Department? department = _departmentService.Find(id);
+            if (department == null)
+                return NotFound($"Couldn't find employee with {id}");
+            _departmentService.Delete(department);
+            return Ok("Success");
         }
     }
 }

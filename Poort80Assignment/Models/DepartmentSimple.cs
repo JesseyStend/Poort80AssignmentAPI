@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Poort80Assignment.Models
 {
-    public class Department : DepartmentSimple
+    public class DepartmentSimple : DepartmentIn
     {
-        public List<Employee> employees { get; set; } = new List<Employee>();
+        [Key]
+        public int Id { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using Poort80Assignment.Context;
 
 namespace Poort80Assignment.Migrations
 {
-    [DbContext(typeof(Context.AppContext))]
+    [DbContext(typeof(ApiContext))]
     partial class EmployeeContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -35,8 +35,7 @@ namespace Poort80Assignment.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -70,8 +69,7 @@ namespace Poort80Assignment.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

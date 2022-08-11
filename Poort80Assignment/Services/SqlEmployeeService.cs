@@ -1,14 +1,13 @@
-﻿using Poort80Assignment.Context;
-using Poort80Assignment.Interfaces;
+﻿using Poort80Assignment.Interfaces;
 using Poort80Assignment.Models;
 
 namespace Poort80Assignment.Service
 {
-    public class SqlEmployeeService : ICRUDservice<Employee>
+    public class SqlEmployeeService : ICRUDservice<Employee, EmployeeIn>
     {
-        private Context.AppContext _appContext;
+        private Context.ApiContext _appContext;
 
-        public SqlEmployeeService(AppContext employeeContext)
+        public SqlEmployeeService(Context.ApiContext employeeContext)
         {
             _appContext = employeeContext;
         }
@@ -18,12 +17,16 @@ namespace Poort80Assignment.Service
             return _appContext.employees.ToList();
         }
 
-        public Employee Create(Employee entity)
+        public Employee Create(EmployeeIn entity)
         {
-            entity.Id = _appContext.employees.Last().Id + 1;
-            _appContext.employees.Add(entity);
+            Employee employee = new()
+            {
+                Name = entity.Name,
+                DepartmentId = (int)(entity.DepartmentId != null? entity.DepartmentId : 1)
+            };
+            _appContext.employees.Add(employee);
             _appContext.SaveChanges();
-            return entity;
+            return employee;
         }
 
         public void Delete(Employee entity)
@@ -37,11 +40,22 @@ namespace Poort80Assignment.Service
             return _appContext.employees.Find(id);
         }
 
-        public Employee? Update(Employee entity)
+        public Employee? Update(EmployeeIn change, Employee current)
         {
-            _appContext.employees.Update(entity);
+            Type t = typeof(Employee);
+
+            var properties = t.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
+
+            foreach (var prop in properties)
+            {
+                var value = prop.GetValue(change, null);
+                if (value != null)
+                    prop.SetValue(current, value, null);
+            }
+
+            _appContext.employees.Update(current);
             _appContext.SaveChanges();
-            return _appContext.employees.Find(entity.Id);
+            return current;
         }
     }
 }

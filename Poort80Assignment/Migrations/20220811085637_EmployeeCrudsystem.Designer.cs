@@ -11,8 +11,8 @@ using Poort80Assignment.Context;
 namespace Poort80Assignment.Migrations
 {
     [DbContext(typeof(Context.ApiContext))]
-    [Migration("20220810185344_AddedDepartmentToEmployee")]
-    partial class AddedDepartmentToEmployee
+    [Migration("20220811085637_EmployeeCrudsystem")]
+    partial class EmployeeCrudsystem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,13 +104,11 @@ namespace Poort80Assignment.Migrations
 
             modelBuilder.Entity("Poort80Assignment.Models.Employee", b =>
                 {
-                    b.HasOne("Poort80Assignment.Models.Department", "Department")
+                    b.HasOne("Poort80Assignment.Models.Department", null)
                         .WithMany("employees")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Poort80Assignment.Models.Department", b =>

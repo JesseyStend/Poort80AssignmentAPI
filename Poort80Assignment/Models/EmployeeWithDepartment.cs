@@ -2,6 +2,6 @@
 {
     public class EmployeeWithDepartment : Employee
     {
-        public Department? Department { get; set; }
+        public DepartmentSimple? Department { get; set; }
     }
 }

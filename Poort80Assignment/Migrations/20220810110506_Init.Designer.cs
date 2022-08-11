@@ -10,7 +10,7 @@ using Poort80Assignment.Context;
 
 namespace Poort80Assignment.Migrations
 {
-    [DbContext(typeof(Context.AppContext))]
+    [DbContext(typeof(Context.ApiContext))]
     [Migration("20220810110506_Init")]
     partial class Init
     {
