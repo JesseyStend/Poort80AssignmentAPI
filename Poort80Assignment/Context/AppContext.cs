@@ -3,9 +3,9 @@ using Poort80Assignment.Models;
 
 namespace Poort80Assignment.Context
 {
-    public class EmployeeContext : DbContext
+    public class AppContext : DbContext
     {
-        public EmployeeContext(DbContextOptions<EmployeeContext> options): base(options)
+        public AppContext(DbContextOptions<AppContext> options): base(options)
         {
 
         }

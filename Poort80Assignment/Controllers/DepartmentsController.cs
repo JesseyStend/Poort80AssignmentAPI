@@ -15,7 +15,6 @@ namespace Poort80Assignment.Controllers
     {
         private readonly ILogger<DepartmentsController> _logger;
         private SqlDepartmentService _departmentService;
-        //private Context.AppContext _context;
 
         public DepartmentsController(ILogger<DepartmentsController> logger, SqlDepartmentService service)
         {

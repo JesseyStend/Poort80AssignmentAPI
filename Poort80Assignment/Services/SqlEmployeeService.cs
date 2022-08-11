@@ -8,34 +8,40 @@ namespace Poort80Assignment.Service
     {
         private Context.AppContext _appContext;
 
-        public SqlEmployeeService(Context.AppContext employeeContext)
+        public SqlEmployeeService(AppContext employeeContext)
         {
             _appContext = employeeContext;
         }
 
         public List<Employee> All()
         {
-            throw new NotImplementedException();
+            return _appContext.employees.ToList();
         }
 
         public Employee Create(Employee entity)
         {
-            throw new NotImplementedException();
+            entity.Id = _appContext.employees.Last().Id + 1;
+            _appContext.employees.Add(entity);
+            _appContext.SaveChanges();
+            return entity;
         }
 
         public void Delete(Employee entity)
         {
-            throw new NotImplementedException();
+            _appContext.employees.Remove(entity);
+            _appContext.SaveChanges();
         }
 
-        public Employee Find(int id)
+        public Employee? Find(int id)
         {
-            throw new NotImplementedException();
+            return _appContext.employees.Find(id);
         }
 
-        public Employee Update(Employee entity)
+        public Employee? Update(Employee entity)
         {
-            throw new NotImplementedException();
+            _appContext.employees.Update(entity);
+            _appContext.SaveChanges();
+            return _appContext.employees.Find(entity.Id);
         }
     }
 }

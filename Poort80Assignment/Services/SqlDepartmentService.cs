@@ -8,34 +8,40 @@ namespace Poort80Assignment.Service
     {
         private Context.AppContext _appContext;
 
-        public SqlDepartmentService(Context.AppContext employeeContext)
+        public SqlDepartmentService(AppContext employeeContext)
         {
             _appContext = employeeContext;
         }
 
         public List<Department> All()
         {
-            throw new NotImplementedException();
+            return _appContext.departments.ToList();
         }
 
         public Department Create(Department entity)
         {
-            throw new NotImplementedException();
+            entity.Id = _appContext.departments.Last().Id + 1;
+            _appContext.departments.Add(entity);
+            _appContext.SaveChanges();
+            return entity;
         }
 
         public void Delete(Department entity)
         {
-            throw new NotImplementedException();
+            _appContext.departments.Remove(entity);
+            _appContext.SaveChanges();
         }
 
-        public Department Find(int id)
+        public Department? Find(int id)
         {
-            throw new NotImplementedException();
+            return _appContext.departments.Find(id);
         }
 
-        public Department Update(Department entity)
+        public Department? Update(Department entity)
         {
-            throw new NotImplementedException();
+            _appContext.departments.Update(entity);
+            _appContext.SaveChanges();
+            return _appContext.departments.Find(entity.Id);
         }
     }
 }
