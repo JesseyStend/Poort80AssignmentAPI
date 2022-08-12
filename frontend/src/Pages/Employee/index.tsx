@@ -18,17 +18,17 @@ const Employee: React.FunctionComponent<EmployeeProps> = () => {
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e)=>{
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        fetch("https://localhost:7143/api/Employees/" + id, {
-            method: "PUT",
+        fetch("https://localhost:7143/api/Employees" + (action === "edit"? `/${id}` : ""), {
+            method: action === "edit"? "PUT" : "Post",
             headers: {
                 "Content-Type": "application/json" 
             },
             body: JSON.stringify({
-                name: formData.get("name"),
+                name: formData.get("fullname"),
                 departmentId: selectedDepartment || employee?.departmentId
             })
         })
-            .then(()=>navigate("/table/employees"))
+          .then(()=>navigate("/table/employees"))
         
     }
 

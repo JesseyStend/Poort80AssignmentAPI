@@ -33,6 +33,14 @@ const Table: React.FunctionComponent<TableProps> = () => {
       });
   }, []);
 
+  const handleDelete = (id: number)=>{
+    fetch(`https://localhost:7143/api/${section}/${id}`, {
+      method: "DELETE"
+    }).then(_r => {
+      return setTableData({ tableRowProps: tableData!.tableRowProps, rows: tableData!.rows.filter(r => r.id !== id) });
+    })
+  }
+
   return !tableData ? (
     <LinearProgress />
   ) : (
@@ -60,7 +68,7 @@ const Table: React.FunctionComponent<TableProps> = () => {
               <TableRow key={row.name} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 {tableData.tableRowProps.map((prop) => (
                   <TableCell component='th' scope='row'>
-                    {typeof row[prop] === "object" ? row[prop].map((p: { name: string }) => p.name).join(", ") : row[prop]}
+                    {typeof row[prop] === "object" ? row[prop].length > 0? row[prop].map((p: { name: string }) => p.name).join(", ") : "No employees connected" : row[prop]}
                   </TableCell>
                 ))}
                 <TableCell align='right'>
@@ -68,7 +76,7 @@ const Table: React.FunctionComponent<TableProps> = () => {
                     <IconButton href={`/${section?.slice(0, -1)}/edit/${row.id}`}>
                       <Edit />
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={()=> handleDelete(row.id)}>
                       <Delete />
                     </IconButton>
                   </Stack>

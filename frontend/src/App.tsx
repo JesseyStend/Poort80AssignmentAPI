@@ -2,6 +2,7 @@ import { AppBar, CardContent, Divider, Grid, Link, Paper, Slide, Toolbar, Typogr
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import BreadCrumbsComp from "./Components/Beadcrumbs";
+import Department from "./Pages/Department";
 import Employee from "./Pages/Employee";
 import Home from "./Pages/Home";
 import Table from "./Pages/Table";
@@ -36,7 +37,10 @@ function App() {
             <Routes>
               <Route path='/home' element={<Home />} />
               <Route path='/table/:section' element={<Table />} />
-              <Route path='/employee/:action/:id' element={<Employee/>}/> 
+              <Route path='/employee/:action/:id' element={<Employee/>}/>
+              <Route path='/employee/:action' element={<Employee/>}/>
+              <Route path='/department/:action/:id' element={<Department/>}/>
+              <Route path='/department/:action' element={<Department/>}/>
               <Route path='*' element={<Navigate replace to='/home' />} />
             </Routes>
           </Grid>
