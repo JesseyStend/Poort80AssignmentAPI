@@ -42,7 +42,7 @@ namespace Poort80Assignment.Service
 
         public Employee? Update(EmployeeIn change, Employee current)
         {
-            Type t = typeof(Employee);
+            Type t = typeof(EmployeeIn);
 
             var properties = t.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
 
